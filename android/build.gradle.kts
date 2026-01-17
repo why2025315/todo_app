@@ -1,7 +1,7 @@
 allprojects {
     repositories {
-        maven { url = uri("https://mirrors.cloud.tencent.com/gradle/maven2/") }
-        maven { url = uri("https://mirrors.cloud.tencent.com/gradle/google/") }
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/") }
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/google/") }
     }
 }
 

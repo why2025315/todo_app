@@ -8,13 +8,13 @@ enum Repeat { none, daily, weekly, monthly, yearly }
 @freezed
 abstract class Todo with _$Todo {
   const factory Todo({
-    String? id,
+    required String id,
     required String title,
     bool? completed,
     bool? important,
-    String? remindAt,
-    String? createdAt,
-    String? updatedAt,
+    DateTime? remindAt,
+    DateTime? createdAt,
+    DateTime? updatedAt,
     Repeat? repeat,
   }) = _Todo;
 

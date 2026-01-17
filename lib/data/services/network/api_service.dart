@@ -1,4 +1,4 @@
-import 'package:todo_app/domain/models/todo/todo.dart';
+import 'package:todo_app/domain/entities/todo/todo.dart';
 import 'package:todo_app/utils/result.dart';
 
 import 'dio_client.dart';

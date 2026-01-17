@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Todo implements DiagnosticableTreeMixin {
 
- String? get id; String get title; bool? get completed; bool? get important; String? get remindAt; String? get createdAt; String? get updatedAt; Repeat? get repeat;
+ String get id; String get title; bool? get completed; bool? get important; DateTime? get remindAt; DateTime? get createdAt; DateTime? get updatedAt; Repeat? get repeat;
 /// Create a copy of Todo
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -54,7 +54,7 @@ abstract mixin class $TodoCopyWith<$Res>  {
   factory $TodoCopyWith(Todo value, $Res Function(Todo) _then) = _$TodoCopyWithImpl;
 @useResult
 $Res call({
- String? id, String title, bool? completed, bool? important, String? remindAt, String? createdAt, String? updatedAt, Repeat? repeat
+ String id, String title, bool? completed, bool? important, DateTime? remindAt, DateTime? createdAt, DateTime? updatedAt, Repeat? repeat
 });
 
 
@@ -71,16 +71,16 @@ class _$TodoCopyWithImpl<$Res>
 
 /// Create a copy of Todo
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? title = null,Object? completed = freezed,Object? important = freezed,Object? remindAt = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? repeat = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? completed = freezed,Object? important = freezed,Object? remindAt = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? repeat = freezed,}) {
   return _then(_self.copyWith(
-id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,completed: freezed == completed ? _self.completed : completed // ignore: cast_nullable_to_non_nullable
 as bool?,important: freezed == important ? _self.important : important // ignore: cast_nullable_to_non_nullable
 as bool?,remindAt: freezed == remindAt ? _self.remindAt : remindAt // ignore: cast_nullable_to_non_nullable
-as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as String?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as String?,repeat: freezed == repeat ? _self.repeat : repeat // ignore: cast_nullable_to_non_nullable
+as DateTime?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,repeat: freezed == repeat ? _self.repeat : repeat // ignore: cast_nullable_to_non_nullable
 as Repeat?,
   ));
 }
@@ -166,7 +166,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String title,  bool? completed,  bool? important,  String? remindAt,  String? createdAt,  String? updatedAt,  Repeat? repeat)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  bool? completed,  bool? important,  DateTime? remindAt,  DateTime? createdAt,  DateTime? updatedAt,  Repeat? repeat)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Todo() when $default != null:
 return $default(_that.id,_that.title,_that.completed,_that.important,_that.remindAt,_that.createdAt,_that.updatedAt,_that.repeat);case _:
@@ -187,7 +187,7 @@ return $default(_that.id,_that.title,_that.completed,_that.important,_that.remin
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String title,  bool? completed,  bool? important,  String? remindAt,  String? createdAt,  String? updatedAt,  Repeat? repeat)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  bool? completed,  bool? important,  DateTime? remindAt,  DateTime? createdAt,  DateTime? updatedAt,  Repeat? repeat)  $default,) {final _that = this;
 switch (_that) {
 case _Todo():
 return $default(_that.id,_that.title,_that.completed,_that.important,_that.remindAt,_that.createdAt,_that.updatedAt,_that.repeat);case _:
@@ -207,7 +207,7 @@ return $default(_that.id,_that.title,_that.completed,_that.important,_that.remin
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String title,  bool? completed,  bool? important,  String? remindAt,  String? createdAt,  String? updatedAt,  Repeat? repeat)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  bool? completed,  bool? important,  DateTime? remindAt,  DateTime? createdAt,  DateTime? updatedAt,  Repeat? repeat)?  $default,) {final _that = this;
 switch (_that) {
 case _Todo() when $default != null:
 return $default(_that.id,_that.title,_that.completed,_that.important,_that.remindAt,_that.createdAt,_that.updatedAt,_that.repeat);case _:
@@ -222,16 +222,16 @@ return $default(_that.id,_that.title,_that.completed,_that.important,_that.remin
 @JsonSerializable()
 
 class _Todo with DiagnosticableTreeMixin implements Todo {
-  const _Todo({this.id, required this.title, this.completed, this.important, this.remindAt, this.createdAt, this.updatedAt, this.repeat});
+  const _Todo({required this.id, required this.title, this.completed, this.important, this.remindAt, this.createdAt, this.updatedAt, this.repeat});
   factory _Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
 
-@override final  String? id;
+@override final  String id;
 @override final  String title;
 @override final  bool? completed;
 @override final  bool? important;
-@override final  String? remindAt;
-@override final  String? createdAt;
-@override final  String? updatedAt;
+@override final  DateTime? remindAt;
+@override final  DateTime? createdAt;
+@override final  DateTime? updatedAt;
 @override final  Repeat? repeat;
 
 /// Create a copy of Todo
@@ -273,7 +273,7 @@ abstract mixin class _$TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
   factory _$TodoCopyWith(_Todo value, $Res Function(_Todo) _then) = __$TodoCopyWithImpl;
 @override @useResult
 $Res call({
- String? id, String title, bool? completed, bool? important, String? remindAt, String? createdAt, String? updatedAt, Repeat? repeat
+ String id, String title, bool? completed, bool? important, DateTime? remindAt, DateTime? createdAt, DateTime? updatedAt, Repeat? repeat
 });
 
 
@@ -290,16 +290,16 @@ class __$TodoCopyWithImpl<$Res>
 
 /// Create a copy of Todo
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? title = null,Object? completed = freezed,Object? important = freezed,Object? remindAt = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? repeat = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? completed = freezed,Object? important = freezed,Object? remindAt = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? repeat = freezed,}) {
   return _then(_Todo(
-id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,completed: freezed == completed ? _self.completed : completed // ignore: cast_nullable_to_non_nullable
 as bool?,important: freezed == important ? _self.important : important // ignore: cast_nullable_to_non_nullable
 as bool?,remindAt: freezed == remindAt ? _self.remindAt : remindAt // ignore: cast_nullable_to_non_nullable
-as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as String?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as String?,repeat: freezed == repeat ? _self.repeat : repeat // ignore: cast_nullable_to_non_nullable
+as DateTime?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,repeat: freezed == repeat ? _self.repeat : repeat // ignore: cast_nullable_to_non_nullable
 as Repeat?,
   ));
 }

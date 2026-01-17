@@ -8,6 +8,8 @@
 ///     return result.error;
 /// }
 /// ```
+library;
+
 sealed class Result<T> {
   const Result();
 

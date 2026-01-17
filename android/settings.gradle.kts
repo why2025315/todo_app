@@ -11,9 +11,9 @@ pluginManagement {
     includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
 
     repositories {
-        maven { url = uri("https://mirrors.cloud.tencent.com/gradle/gradle-plugin-portal/") }
-        maven { url = uri("https://mirrors.cloud.tencent.com/gradle/google/") }
-        maven { url = uri("https://mirrors.cloud.tencent.com/gradle/maven2/") }
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/gradle-plugin-portal/") }
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/google/") }
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/") }
     }
 }
 
