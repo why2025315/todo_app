@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_app/data/repositories/todo/todo_repository_file.dart';
+import 'package:todo_app/data/repositories/todo/todo_responsitory_hive.dart';
 
 import 'package:todo_app/ui/about/widgets/about_screen.dart';
 import 'package:todo_app/ui/detail/widgets/detail_screen.dart';
@@ -14,7 +14,7 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _homeNavigatorKey = GlobalKey<NavigatorState>();
 
 // 创建单例的TodoRepository和TodoViewModel
-final TodoRepositoryFile _todoRepository = TodoRepositoryFile();
+final TodoResponsitoryHive _todoRepository = TodoResponsitoryHive();
 final TodoViewModel _todoViewModel = TodoViewModel(
   todoRepository: _todoRepository,
 );

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/data/repositories/todo/todo_responsitory_hive.dart';
 import 'package:todo_app/domain/entities/todo/todo.dart';
-import 'package:todo_app/domain/repositories/todo_repository.dart';
 import 'package:todo_app/utils/command.dart';
 import 'package:todo_app/utils/result.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:logging/logging.dart';
+
+final log = Logger('TodoViewModel');
 
 class TodoViewModel extends ChangeNotifier {
   TodoViewModel({required this.todoRepository}) {
@@ -11,15 +14,14 @@ class TodoViewModel extends ChangeNotifier {
   }
 
   late Command0 load;
-  final TodoRepository todoRepository;
+  final TodoResponsitoryHive todoRepository;
   List<Todo> _todos = [];
 
   get todos => _todos;
 
   Future<Result<List<Todo>>> _load() async {
     try {
-      final todos = await todoRepository.getAllTodos();
-      _todos = todos;
+      _todos = await todoRepository.loadAll();
       return Result.ok(_todos);
     } catch (e) {
       return Result.error(Exception(e.toString()));
@@ -30,9 +32,10 @@ class TodoViewModel extends ChangeNotifier {
 
   Future<void> addTodo(Todo todo) async {
     try {
-      await todoRepository.addTodo(todo);
+      _todos.add(todo);
       // 直接从仓库获取最新数据，更新本地状态
-      _todos = await todoRepository.getAllTodos();
+      todoRepository.add(todo);
+      log.fine('Add Todo: $todo $_todos');
     } catch (e) {
       print(e);
     } finally {
@@ -42,9 +45,10 @@ class TodoViewModel extends ChangeNotifier {
 
   Future<void> deleteTodo(String id) async {
     try {
-      await todoRepository.deleteTodo(id);
+      _todos.removeWhere((ele) => ele.id == id);
       // 直接从仓库获取最新数据，更新本地状态
-      _todos = await todoRepository.getAllTodos();
+      todoRepository.delete(id);
+      log.fine('Delete Todo: $id');
     } catch (e) {
       print(e);
     } finally {
@@ -54,9 +58,11 @@ class TodoViewModel extends ChangeNotifier {
 
   Future<void> updateTodo(Todo todo) async {
     try {
-      await todoRepository.updateTodo(todo);
-      // 直接从仓库获取最新数据，更新本地状态
-      _todos = await todoRepository.getAllTodos();
+      final index = _todos.indexWhere((ele) => ele.id == todo.id);
+      if (index != -1) {
+        _todos[index] = todo;
+      }
+      todoRepository.update(todo);
     } catch (e) {
       print(e);
     } finally {

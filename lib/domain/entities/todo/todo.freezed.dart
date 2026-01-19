@@ -13,7 +13,7 @@ part of 'todo.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$Todo implements DiagnosticableTreeMixin {
+mixin _$Todo {
 
  String get id; String get title; bool? get completed; bool? get important; DateTime? get remindAt; DateTime? get createdAt; DateTime? get updatedAt; Repeat? get repeat;
 /// Create a copy of Todo
@@ -25,12 +25,6 @@ $TodoCopyWith<Todo> get copyWith => _$TodoCopyWithImpl<Todo>(this as Todo, _$ide
   /// Serializes this Todo to a JSON map.
   Map<String, dynamic> toJson();
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'Todo'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('completed', completed))..add(DiagnosticsProperty('important', important))..add(DiagnosticsProperty('remindAt', remindAt))..add(DiagnosticsProperty('createdAt', createdAt))..add(DiagnosticsProperty('updatedAt', updatedAt))..add(DiagnosticsProperty('repeat', repeat));
-}
 
 @override
 bool operator ==(Object other) {
@@ -42,7 +36,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,id,title,completed,important,remindAt,createdAt,updatedAt,repeat);
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'Todo(id: $id, title: $title, completed: $completed, important: $important, remindAt: $remindAt, createdAt: $createdAt, updatedAt: $updatedAt, repeat: $repeat)';
 }
 
@@ -221,7 +215,7 @@ return $default(_that.id,_that.title,_that.completed,_that.important,_that.remin
 /// @nodoc
 @JsonSerializable()
 
-class _Todo with DiagnosticableTreeMixin implements Todo {
+class _Todo implements Todo {
   const _Todo({required this.id, required this.title, this.completed, this.important, this.remindAt, this.createdAt, this.updatedAt, this.repeat});
   factory _Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
 
@@ -244,12 +238,6 @@ _$TodoCopyWith<_Todo> get copyWith => __$TodoCopyWithImpl<_Todo>(this, _$identit
 Map<String, dynamic> toJson() {
   return _$TodoToJson(this, );
 }
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'Todo'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('completed', completed))..add(DiagnosticsProperty('important', important))..add(DiagnosticsProperty('remindAt', remindAt))..add(DiagnosticsProperty('createdAt', createdAt))..add(DiagnosticsProperty('updatedAt', updatedAt))..add(DiagnosticsProperty('repeat', repeat));
-}
 
 @override
 bool operator ==(Object other) {
@@ -261,7 +249,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,id,title,completed,important,remindAt,createdAt,updatedAt,repeat);
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'Todo(id: $id, title: $title, completed: $completed, important: $important, remindAt: $remindAt, createdAt: $createdAt, updatedAt: $updatedAt, repeat: $repeat)';
 }
 
