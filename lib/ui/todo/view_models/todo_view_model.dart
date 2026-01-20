@@ -69,4 +69,18 @@ class TodoViewModel extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> batchDeleteTodos(List<dynamic> ids) async {
+    try {
+      // 从本地状态中移除已完成的待办事项
+      _todos.removeWhere((ele) => ids.contains(ele.id));
+      // 调用仓库的批量删除方法
+      await todoRepository.batchDeleteCompleted(ids as List<String>);
+      log.fine('Batch Delete Completed Todos');
+    } catch (e) {
+      print(e);
+    } finally {
+      notifyListeners();
+    }
+  }
 }

@@ -3,9 +3,18 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_app/ui/todo/view_models/todo_view_model.dart';
 
 class TodoList extends StatelessWidget {
-  const TodoList({super.key, required this.viewModel});
+  const TodoList({
+    super.key,
+    required this.viewModel,
+    required this.toggleSelect,
+    this.selectedTodoIds,
+    this.isBatchDeleteMode,
+  });
 
   final TodoViewModel viewModel;
+  final bool? isBatchDeleteMode;
+  final void Function(String id) toggleSelect;
+  final List<dynamic>? selectedTodoIds;
   void doNothing(BuildContext context) {}
 
   @override
@@ -16,8 +25,9 @@ class TodoList extends StatelessWidget {
     return ListView.builder(
       itemCount: viewModel.todos.length,
       itemBuilder: (context, index) {
+        final todo = viewModel.todos[index];
         return Slidable(
-          key: Key(viewModel.todos[index].id),
+          key: Key(todo.id),
 
           endActionPane: ActionPane(
             motion: ScrollMotion(),
@@ -66,35 +76,37 @@ class TodoList extends StatelessWidget {
           ),
           child: CheckboxListTile(
             title: Text(
-              viewModel.todos[index].title,
-              style: viewModel.todos[index].completed == true
+              todo.title,
+              style: todo.completed == true
                   ? TextStyle(
                       decoration: TextDecoration.lineThrough,
                       color: Colors.grey,
                     )
                   : null,
             ),
-            value: viewModel.todos[index].completed ?? false,
+            value: isBatchDeleteMode == true
+                ? selectedTodoIds?.contains(todo.id) ?? false
+                : todo.completed ?? false,
             onChanged: (value) {
-              viewModel.updateTodo(
-                viewModel.todos[index].copyWith(completed: value),
-              );
+              if (isBatchDeleteMode == true) {
+                toggleSelect(todo.id);
+                return;
+              }
+              viewModel.updateTodo(todo.copyWith(completed: value));
             },
-            subtitle:
-                (viewModel.todos[index].important == true ||
-                    viewModel.todos[index].remindAt != null)
+            subtitle: (todo.important == true || todo.remindAt != null)
                 ? Row(
                     children: [
-                      if (viewModel.todos[index].important == true)
+                      if (todo.important == true)
                         Icon(Icons.flag, color: Colors.red),
-                      if (viewModel.todos[index].remindAt != null)
-                        Text(
-                          '提醒时间: ${viewModel.todos[index].remindAt!.toLocal()}',
-                        ),
+                      if (todo.remindAt != null)
+                        Text('提醒时间: ${todo.remindAt!.toLocal()}'),
                     ],
                   )
                 : null,
-            controlAffinity: ListTileControlAffinity.leading,
+            controlAffinity: isBatchDeleteMode == true
+                ? ListTileControlAffinity.trailing
+                : ListTileControlAffinity.leading,
           ),
         );
       },

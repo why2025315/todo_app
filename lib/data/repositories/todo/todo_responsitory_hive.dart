@@ -72,4 +72,12 @@ class TodoResponsitoryHive {
     final todoEntity = TodoEntity.fromTodo(todo);
     await box.put(todo.id, todoEntity);
   }
+
+  // 批量删除已完成的待办事项
+  Future<void> batchDeleteCompleted(List<String> ids) async {
+    final box = await _openBox();
+    for (final id in ids) {
+      await box.delete(id);
+    }
+  }
 }

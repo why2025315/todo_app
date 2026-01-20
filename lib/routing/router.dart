@@ -23,22 +23,28 @@ final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: Routes.home,
   routes: <RouteBase>[
-    ShellRoute(
-      navigatorKey: _homeNavigatorKey,
-      builder: (context, state, child) {
-        return Scaffold(body: child, bottomNavigationBar: BottomNavigation());
-      },
-      routes: [
-        GoRoute(
-          path: Routes.home,
-          builder: (context, state) => TodoScreen(viewModel: _todoViewModel),
-        ),
-        GoRoute(
-          path: Routes.detail,
-          builder: (context, state) => DetailScreen(),
-        ),
-        GoRoute(path: Routes.about, builder: (context, state) => AboutScreen()),
-      ],
+    GoRoute(
+      path: Routes.home,
+      builder: (context, state) => TodoScreen(viewModel: _todoViewModel),
     ),
+    GoRoute(path: Routes.detail, builder: (context, state) => DetailScreen()),
+    GoRoute(path: Routes.about, builder: (context, state) => AboutScreen()),
+    // ShellRoute(
+    //   navigatorKey: _homeNavigatorKey,
+    //   builder: (context, state, child) {
+    //     return Scaffold(body: child, bottomNavigationBar: BottomNavigation());
+    //   },
+    //   routes: [
+    //     GoRoute(
+    //       path: Routes.home,
+    //       builder: (context, state) => TodoScreen(viewModel: _todoViewModel),
+    //     ),
+    //     GoRoute(
+    //       path: Routes.detail,
+    //       builder: (context, state) => DetailScreen(),
+    //     ),
+    //     GoRoute(path: Routes.about, builder: (context, state) => AboutScreen()),
+    //   ],
+    // ),
   ],
 );

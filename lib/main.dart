@@ -12,10 +12,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Logger.root.level = Level.ALL;
 
-  Logger.root.onRecord.listen((record) {
-    print('${record.level.name}: ${record.time}: ${record.message}');
-  });
-
+  // Logger.root.onRecord.listen((record) {
+  //   print('${record.level.name}: ${record.time}: ${record.message}');
+  // });
   // 启动应用
   runApp(MultiProvider(providers: providers, child: MyApp()));
 }
