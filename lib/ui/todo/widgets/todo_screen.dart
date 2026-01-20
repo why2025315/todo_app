@@ -58,6 +58,13 @@ class _TodoScreenState extends State<TodoScreen> {
     });
   }
 
+  bool get isAllSelected {
+    if (selectedTodoIds.isEmpty) {
+      return false;
+    }
+    return selectedTodoIds.length == widget.viewModel.todos.length;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,13 +142,9 @@ class _TodoScreenState extends State<TodoScreen> {
                         child: TextButton.icon(
                           onPressed: () {
                             setState(() {
-                              if (selectedTodoIds.length ==
-                                  widget.viewModel.todos.length) {
+                              if (isAllSelected) {
                                 selectedTodoIds.clear();
                               } else {
-                                selectedTodoIds = widget.viewModel.todos
-                                    .map((todo) => todo.id)
-                                    .toList();
                                 selectedTodoIds = widget.viewModel.todos
                                     .map((todo) => todo.id)
                                     .toList();
@@ -149,22 +152,24 @@ class _TodoScreenState extends State<TodoScreen> {
                             });
                           },
                           icon: const Icon(Icons.checklist),
-                          label: const Text('全选/取消'),
+                          label: Text(isAllSelected ? '取消全选' : '全选'),
                         ),
                       ),
                       Expanded(
                         child: TextButton.icon(
-                          onPressed: () {
-                            if (selectedTodoIds.isNotEmpty) {
-                              widget.viewModel.batchDeleteTodos(
-                                selectedTodoIds,
-                              );
-                              setState(() {
-                                selectedTodoIds.clear();
-                                isBatchDeleteMode = false;
-                              });
-                            }
-                          },
+                          onPressed: selectedTodoIds.isNotEmpty
+                              ? () {
+                                  if (selectedTodoIds.isNotEmpty) {
+                                    widget.viewModel.batchDeleteTodos(
+                                      selectedTodoIds,
+                                    );
+                                    setState(() {
+                                      selectedTodoIds.clear();
+                                      isBatchDeleteMode = false;
+                                    });
+                                  }
+                                }
+                              : null,
                           icon: const Icon(Icons.delete),
                           label: const Text('删除'),
                         ),

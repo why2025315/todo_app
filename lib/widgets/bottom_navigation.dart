@@ -10,9 +10,21 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int _selectedIndex = 0;
+  // int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final GoRouter router = GoRouter.of(context);
+    final RouteMatch currentRoute =
+        router.routerDelegate.currentConfiguration.last;
+    final selectedIndex = BottomTab.values.indexWhere(
+      (tab) => tab.route == currentRoute.matchedLocation,
+    );
     return BottomNavigationBar(
       items: [
         BottomNavigationBarItem(
@@ -24,11 +36,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
           label: BottomTab.about.title,
         ),
       ],
-      currentIndex: _selectedIndex,
+      currentIndex: selectedIndex,
       onTap: (index) {
-        setState(() {
-          _selectedIndex = index;
-        });
         context.go(BottomTab.values[index].route);
       },
     );

@@ -6,12 +6,12 @@ import 'package:todo_app/ui/about/widgets/about_screen.dart';
 import 'package:todo_app/ui/detail/widgets/detail_screen.dart';
 import 'package:todo_app/ui/todo/view_models/todo_view_model.dart';
 import 'package:todo_app/ui/todo/widgets/todo_screen.dart';
-import 'package:todo_app/widgets/bottom_navigation.dart';
+// import 'package:todo_app/widgets/bottom_navigation.dart';
 
 import 'routes.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _homeNavigatorKey = GlobalKey<NavigatorState>();
+// final _homeNavigatorKey = GlobalKey<NavigatorState>();
 
 // 创建单例的TodoRepository和TodoViewModel
 final TodoResponsitoryHive _todoRepository = TodoResponsitoryHive();

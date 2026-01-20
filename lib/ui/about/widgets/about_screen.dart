@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/widgets/bottom_navigation.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -8,6 +9,7 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('About')),
       body: Container(),
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 }
